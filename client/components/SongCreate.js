@@ -22,7 +22,6 @@ class SongCreate extends Component {
         refetchQueries: [{query}]
         })
         .then(()=> hashHistory.push('/'));
-
     }
     updateValue(event){
         this.setState({'title': event.target.value}) 

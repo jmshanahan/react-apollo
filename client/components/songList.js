@@ -6,14 +6,27 @@ import query from '../queries/fetchSongs';
 
 class SongList extends Component {
 
+    constructor(props){
+      super(props);
+      //this.onSongDelete = this.onSongDelete.bind(this, id);
+    }
+  
+    onSongDelete(id,event){
+      // console.log(`${id}`);
+      // console.log(event);
+      this.props.mutate({variables: {id}})
+        .then(function () {this.props.data.refetch())
+    }
     renderSongs(){
-      return this.props.data.songs.map(song =>{
+      return this.props.data.songs.map(({id, title}) =>{
         return (
-          <li key={song.id} className="collection-item">
-            {song.title}
+          <li key={id} className="collection-item">
+            {title}
+            <i className="material-icons" 
+            onClick={this.onSongDelete.bind(this,id)}>delete</i>
           </li>
         )
-      })
+      });
     }
   render() {
     if (this.props.data.loading){ return <div>Loading...</div>;}
@@ -28,5 +41,13 @@ class SongList extends Component {
     );
   }
 }
-
-export default graphql(query)(SongList);
+const mutation = gql`
+  mutation DeleteSong($id: ID){
+    deleteSong(id: $id){
+       id
+     }
+   }
+`;
+export default graphql(mutation)(
+graphql(query)(SongList)
+);
