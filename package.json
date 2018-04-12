@@ -8,7 +8,8 @@
     "url": "https://github.com/StephenGrider/Lyrical-GraphQL"
   },
   "scripts": {
-    "dev": "nodemon index.js --ignore client"
+    "dev": "nodemon index.js --ignore client",
+    "lint": "eslint"
   },
   "author": "",
   "license": "ISC",
@@ -40,5 +41,10 @@
     "unique-string": "^1.0.0",
     "webpack": "^2.2.0",
     "webpack-dev-middleware": "^1.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-graphql": "^1.5.0",
+    "eslint-plugin-react": "^7.7.0"
   }
 }
